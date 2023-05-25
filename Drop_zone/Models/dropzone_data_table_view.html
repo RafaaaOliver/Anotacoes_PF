@@ -1,0 +1,184 @@
+<html lang="pt-br">
+<style>
+    .dataTables_filter {
+        float: left !important;
+    }
+
+    #id_table {
+        left: 100px !important;
+        width: 100% !important;
+    }
+
+    .table_fields {
+        width: 100% !important;
+
+    }
+
+    td {
+        color: black;
+        font-size: 15px;
+    }
+
+    .odd {
+        background-color: #f2f2f2 !important;
+    }
+
+    .dataTables_length {
+        display: none !important;
+    }
+
+    #detail_table_lay>tbody>tr:nth-child(6)>td>table>tbody>tr:nth-child(3)>td>table>tbody>tr>td>table {
+        width: 100% !important;
+    }
+
+    #id_table_wrapper {
+        width: 100% !important;
+
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet"
+        href="/core/media/media.nl?id=684079&c=5641302&h=7XQKdVfpjj9LR3OiIoE8xLus3NdAjXDLt4hwgyhSBuTL9BGa&_xt=.css">
+    <!-- Dropzone -->
+    <link rel="stylesheet"
+        href="/core/media/media.nl?id=684072&c=5641302&h=hGjXXaIm0_L1sgLzfrj9Dzlx22G8u0NL8QX_SM75K26TMnHv&_xt=.css">
+    <!-- style_data_table.css -->
+    <script type="text/javascript">
+
+        try {
+            //var record = null;
+            var table = null;
+            var url_atual = window.location.href;
+            var url_atualString = new URL(url_atual);
+            var recordId = url_atualString.searchParams.get("rectype");
+            var url = '/app/site/hosting/scriptlet.nl?script=2029&deploy=1';
+            var id = url_atualString.searchParams.get("id");
+  
+            getIdRecord(recordId, url, id)
+
+            function getIdRecord(recordId, url, id) {
+                var urlRecord = url + '&idRecord=' + recordId
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", urlRecord, true);
+                var responseText = null;
+                xhttp.onload = function (e) {
+                    record = JSON.parse(xhttp.response);
+                    getData(record, id, url);
+                }
+                xhttp.send();
+            }
+
+
+            function removeFile(data, url, id, record) {
+                var url_delete = url + '&id=' + data + '&delete=true'
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url_delete, true);
+                var responseText = null;
+                xhttp.onload = function (e) {
+                    responseText = JSON.parse(xhttp.response);
+                    getData(record, id, url)
+                }
+                xhttp.send();
+            }
+
+            function getData(record, id, url) {
+
+                var url = url + '&id=' + id + '&record=' + record
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, true);
+                var responseText = null;
+                xhttp.onload = function (e) {
+                    responseText = JSON.parse(xhttp.response);
+                    createTable(responseText, url, record, id)
+                }
+                xhttp.send();
+
+            }
+
+            function createTable(responseText, url, record, id) {
+                if (table) {
+                    table.destroy();
+                }
+                table = jQuery('#id_table').DataTable({
+                    data: responseText,
+                    "columns": [
+                        {
+                            "data": "urls",
+                            render: function (data, type) {
+                                if (type === 'display') {
+
+                                    return '<a href="' + url + "&key=" + data + '" target="_blank">' + 'Download' + '</a>';
+
+                                }
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "key",
+                            render: function (data, type) {
+
+                                if (type === 'display') {
+
+                                    color = 'black'
+                                    return '<span style= "font-size":46px; "color:' + color + '">' + data + '</span>';
+
+                                }
+
+                                return data;
+                            }
+                        },
+                        { "data": "size" },
+                        { "data": "date" },
+                        { "data": "employee" },
+                        {
+                            "data": "dateRemove",
+
+                            render: function (data, type) {
+                                if (type === 'display') {
+
+                                    var url_remove = '/app/site/hosting/scriptlet.nl?script=2029&deploy=1'
+                                    return '<p onclick="removeFile(' + data + ',\'' + url_remove + '\'' + ',\'' + id + '\'' + ',\'' + record + '\'' + ')">' + 'Remover' + '</p>';
+
+                                }
+                                return data;
+                            }
+                        },
+                    ],
+
+                    "oLanguage": { "sSearch": "PESQUISAR:" },
+                    "paging": true,
+                    "ordering": true,
+                    "info": false,
+                    "searching": true,
+                });
+            };
+
+        } catch (e) {
+            alert('Error teste' + e);
+        }
+
+    </script>
+</head>
+
+<body>
+    <table id="id_table">
+        <thead id="thead_id">
+            <tr id="id_tr_heard">
+                <th class="th_class" ; style="font-size: 15px;"> Download</th>
+                <th class="th_class" ; style="font-size: 15px;"> Nome do arquivo</th>
+                <th class="th_class" ; style="font-size: 15px;"> tamanho do arquivo</th>
+                <th class="th_class" ; style="font-size: 15px;"> Data</th>
+                <th class="th_class" ; style="font-size: 15px;"> Funcionário</th>
+                <th class="th_class" ; style="font-size: 15px;"> Remover</th>
+            </tr>
+        </thead>
+    </table>
+</body>
+
+</html>

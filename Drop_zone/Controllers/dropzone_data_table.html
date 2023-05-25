@@ -1,0 +1,322 @@
+<html lang="pt-br">
+<style>
+    div.dz-error-message>span {
+        position: fixed;
+    }
+
+    #idP {
+        font-size: 13px;
+        transition-duration: 0.4s;
+    }
+
+    .principalClass {
+        display: none !important;
+    }
+
+    .btnClas {
+        display: none !important;
+    }
+
+    .tableClass {
+        display: none !important;
+    }
+
+    #principal {
+        display: flex !important;
+        align-items: end !important;
+    }
+
+    .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(16, 16, 16, 0.5);
+        z-index: 101;
+    }
+
+    .loadingContainer {
+        width: 100vw;
+        height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        z-index: 102;
+        top: 0;
+    }
+
+    .loader {
+        border: 16px solid transparent;
+        border-radius: 50%;
+        border-top: 16px solid #158775;
+        width: 40px;
+        height: 40px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    #myId>div:nth-child(4)>div.dz-success-mark>svg {
+        fill: #158775 !important;
+    }
+
+    #myId>div>div.dz-success-mark>svg {
+        fill: #158775 !important;
+    }
+
+    .dz-file-preview {
+        display: flex !important;
+        align-items: center;
+    }
+
+    .data-dz-name {
+        font-size: 13px;
+    }
+
+    #id_table {
+        min-width: 96vw !important;
+    }
+
+    .odd {
+        background-color: #f2f2f2 !important;
+    }
+
+    .dz-image {
+        display: none !important;
+    }
+
+    td {
+        color: black;
+        font-size: 13px;
+    }
+
+    .dataTables_length {
+        display: none !important;
+    }
+
+    #myId {
+        max-width: 350px !important;
+        margin: 0px auto 0 !important;
+        border: 2px dashed black;
+        background: #fff;
+        padding: 20px 20px !important;
+        min-height: 100px;
+    }
+
+    .custpage_htmlfield_fs {
+        display: none !important;
+    }
+
+    #bnt {
+        background-color: #158775;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 13px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border: 2px solid #158775;
+        width: 120px;
+        height: 35px;
+        margin-left: 10px;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+
+    #bnt:hover {
+        background-color: rgb(21, 135, 117, 0.8);
+        color: white;
+    }
+
+    .dz-file-preview {
+        border-bottom: 1px solid gray !important;
+    }
+
+    .dz-details {
+        min-width: 95% !important;
+    }
+
+    .classButtonBrifieng {
+        background-color: #007fff;
+        width: 120px;
+        height: 30px;
+        font-size: 13px;
+        color: #fff;
+        background-color: #007fff;
+    }
+
+    .classButtonBrifiengHidden {
+        display: none !important;
+        color: #fff;
+    }
+
+    .classButtonPreCadastro {
+        background-color: #007fff;
+        width: 120px;
+        height: 30px;
+        font-size: 13px;
+        color: #fff;
+        background-color: #007fff;
+    }
+
+    .classButtonPreCadastroHidden{
+        display: none !important;
+        color: #fff;
+    }
+    
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet"
+        href="/core/media/media.nl?id=684079&c=5641302&h=7XQKdVfpjj9LR3OiIoE8xLus3NdAjXDLt4hwgyhSBuTL9BGa&_xt=.css">
+    <link rel="stylesheet"
+        href="/core/media/media.nl?id=684072&c=5641302&h=hGjXXaIm0_L1sgLzfrj9Dzlx22G8u0NL8QX_SM75K26TMnHv&_xt=.css">
+
+
+    <script type="text/javascript">
+
+        try {
+
+            function upload() {
+                try {
+                    Dropzone.instances[0].processQueue();
+
+                } catch (error) {
+                    console.log(error)
+                };
+
+                return false;
+            };
+
+            function exportJSON() {
+                try {
+                    Dropzone.instances[0].processQueue();
+
+                    var url = 'https://5641302.app.netsuite.com/app/site/hosting/scriptlet.nl?script=2029&deploy=1&exportarXML=true'
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("GET", url, true);
+                    var responseText = null;
+                    xhttp.onload = function (e) {
+                        responseText = JSON.parse(xhttp.response);
+
+
+                        alert("teste")
+                    }
+                    xhttp.send();
+
+                } catch (error) {
+                    console.log(error)
+                };
+
+                return false;
+            };
+
+            function removeFile(data, url, id, record) {
+                var url_delete = url + '&id=' + data + '&delete=true'
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url_delete, true);
+                var responseText = null;
+                xhttp.onload = function (e) {
+                    responseText = JSON.parse(xhttp.response);
+                    getData(record, id, url)
+                }
+                xhttp.send();
+            }
+
+            var table = null;
+
+            function getData(record, id, url) {
+
+                var url = url + '&id=' + id + '&record=' + record
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, true);
+                var responseText = null;
+                xhttp.onload = function (e) {
+                    responseText = JSON.parse(xhttp.response);
+                    createTable(responseText, url, record, id)
+                }
+                xhttp.send();
+            }
+
+            function createTable(responseText, url, record, id) {
+                if (table) {
+                    table.destroy();
+                }
+                table = jQuery('#id_table').DataTable({
+                    data: responseText,
+                    "columns": [
+                        {
+                            "data": "urls",
+                            render: function (data, type) {
+                                if (type === 'display') {
+                                    console.log(data)
+                                    var url_remove = '/app/site/hosting/scriptlet.nl?script=2029&deploy=1'
+                                    return ' <a href="' + url + "&key=" + data + '" target="_blank">' + '⬇️' + '</a>&nbsp; <a href="javascript:void(0);" onclick="removeFile(' + data + ',\'' + url_remove + '\'' + ',\'' + id + '\'' + ',\'' + record + '\'' + ')">' + '❌' + '</a>';
+
+                                }
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "key",
+                            render: function (data, type) {
+
+                                if (type === 'display') {
+
+                                    color = 'black'
+                                    return '<span style= "font-size":13px; "color:' + color + '">' + data + '</span>';
+
+                                }
+
+                                return data;
+                            }
+                        },
+                        { "data": "size" },
+                        { "data": "date" },
+                        { "data": "employee" },
+                        { "data": "status" },
+  
+                    ],
+
+                    "oLanguage": { "sSearch": "PESQUISAR:" },
+                    "paging": false,
+                    "ordering": true,
+                    "info": false,
+                    "searching": true,
+                });
+            };
+
+        } catch (e) {
+            alert('Error' + e);
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="loading"></div>
+    <br>
+    <button class="btnClas" value="upload" type="button" id="bnt" onclick="upload()">Upload</button>
+    <table class="tableClass" id="id_table">
+        <thead id="thead_id">
+            <tr id="id_tr_heard" style="background: #F0F1F5">
+                <th class="th_class" ; style="color: #607799 !important; font-weight: bold !important; font-size: 13px !important;"> Ação</th>
+                <th class="th_class" ; style="color: #607799 !important; font-weight: bold !important; font-size: 13px !important;"> Nome do arquivo</th>
+                <th class="th_class" ; style="color: #607799 !important; font-weight: bold !important; font-size: 13px !important;"> Tamanho</th>
+                <th class="th_class" ; style="color: #607799 !important; font-weight: bold !important; font-size: 13px !important;"> Data</th>
+                <th class="th_class" ; style="color: #607799 !important; font-weight: bold !important; font-size: 13px !important;"> Funcionário</th>
+                <th class="th_class" ; style="color: #607799 !important; font-weight: bold !important; font-size: 13px !important;"> Status</th>
+            </tr>
+        </thead>
+    </table>
+</body>
+
+</html>

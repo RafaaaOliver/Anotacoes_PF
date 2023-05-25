@@ -1,0 +1,51 @@
+.container {
+    max-width: 767px;
+    margin: 100px auto 0;
+}
+
+
+.dropzone {
+    min-height: 0px; 
+    border: 0px solid white;
+    background: #fff;
+    padding: 0px 0px;
+}
+
+#myId {
+    max-width: 650px !important;
+    margin: 10px auto 0 !important;
+    border: 2px dashed black;
+    min-height: 60px !important; 
+    background: #fff;
+    padding: 20px 20px !important; 
+  position: relative;
+
+    
+}
+
+#myId>p{
+   text-align: center;
+   font-size: 13px;
+   color: #444444;
+   font-family: Helvetica, Sans-Serif;
+}
+
+#myId {
+    max-width: 650px !important;
+    margin: 10px auto 0 !important;
+    border: 2px dashed black;
+    background: #fff;
+    padding: 20px 20px !important; 
+}
+
+#detail_table_lay > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(3) {
+    display: flex;
+    justify-content: center;
+}
+
+#myId>p{
+   text-align: center;
+   font-size: 13px;
+   color: #444444;
+   font-family: Helvetica, Sans-Serif;
+}

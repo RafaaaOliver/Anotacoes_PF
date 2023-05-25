@@ -1,0 +1,4 @@
+Origem e filtro Netsuite: (Apenas com campo do tipo select)
+Utilizado para filtrar um valor de um registro filho
+ex:
+- cliente.grupo_economico.status = Disponível 

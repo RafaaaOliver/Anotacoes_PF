@@ -1,0 +1,12 @@
+Nomenclatura de Scripts: 
+PF <descrição> <tipo de script (conforme doc)>
+
+ID de Campos:
+- Prefixo "pf";
+
+Nomenclatura de arquivos JS, exemplo (map reduce):
+pf_webdox_request_forms_batch_mr.js
+
+Nomenclatura de Pastas:
+- Tudo em minusculo;
+- Separado por "-";

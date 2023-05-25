@@ -1,0 +1,17 @@
+- Configurar o registro de solicitação de alteração de cliente
+- Inserir um link para vincular ele com a a aba de cadastro 
+
+
+https://5641302.app.netsuite.com/app/common/custom/custrecordentrylist.nl?rectype=2285
+
+Foi criado o customRecord: "Solicitação de alteração de cliente"
+
+BodyField: 
+- Cliente 
+- Executivo de relacionamento // campo do tipo select que olha para a tabela de funcionários
+- Observações
+- Anexo (criado por script)
+
+Regras: 
+- Existe um filtro em cliente onde só aparecerá os que o campo: "Executivo de relacionamento principal" forem iguais ao id do funcionário.
+- Existe um filtro em Executivo de relacionamento, onde só aparecerá os que possuem o Flag "Is Sales Rep" como True.
